@@ -82,4 +82,48 @@ int main() {
 }
 .............................................................................................................................................................................................................................
     Zadanie 3
+#include <iostream>
+#include <fstream>
+#include <set>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+bool maCzteryKolejneZnakiASCII(const string &haslo) {
+    for (int i = 0; i < haslo.length() - 3; ++i) {
+        if (isalnum(haslo[i]) && isalnum(haslo[i + 1]) &&
+            isalnum(haslo[i + 2]) && isalnum(haslo[i + 3])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    ifstream plik("hasla.txt");
+    if (!plik) {
+        cout << "Blad otwierania pliku hasla.txt!" << endl;
+        return 1;
+    }
+
+    int liczbaUzytkownikow = 0;
+    string haslo;
+    while (getline(plik, haslo)) {
+        if (maCzteryKolejneZnakiASCII(haslo)) {
+            liczbaUzytkownikow++;
+        }
+    }
+    plik.close();
+
+    cout << "Liczba uzytkownikow posiadajacych hasla z czterema kolejnymi znakami ASCII: " << liczbaUzytkownikow << endl;
+
+    return 0;
+}
+............................................................................................................................................................................................................................
+    Zadanie 4
+
+
+
+
     
