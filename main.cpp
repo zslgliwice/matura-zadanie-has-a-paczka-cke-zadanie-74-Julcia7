@@ -122,6 +122,59 @@ int main() {
 }
 ............................................................................................................................................................................................................................
     Zadanie 4
+    #include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+bool zawieraCyfre(const string &haslo) {
+    for (char znak : haslo) {
+        if (isdigit(znak)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool zawieraMaleLitery(const string &haslo) {
+    for (char znak : haslo) {
+        if (islower(znak)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool zawieraDuzeLitery(const string &haslo) {
+    for (char znak : haslo) {
+        if (isupper(znak)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    ifstream plik("hasla.txt");
+    if (!plik) {
+        cout << "Nie udalo sie otworzyc pliku hasla.txt!" << endl;
+        return 1;
+    }
+
+    int iloscPoprawnychHasel = 0;
+    string haslo;
+    while (getline(plik, haslo)) {
+        if (zawieraCyfre(haslo) && zawieraMaleLitery(haslo) && zawieraDuzeLitery(haslo)) {
+            iloscPoprawnychHasel++;
+        }
+    }
+    plik.close();
+
+    cout << "Liczba hasel spelniajacych warunki: " << iloscPoprawnychHasel << endl;
+
+    return 0;
+}
 
 
 
