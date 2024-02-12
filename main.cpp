@@ -45,3 +45,41 @@ int main() {
 }
 ..............................................................................................................................................................................................................................
     Zadanie 2
+#include <iostream>
+#include <fstream>
+#include <set>
+#include <string>
+
+using namespace std;
+
+int main() {
+    ifstream plik("hasla.txt");
+    if (!plik.good()) {
+        cout << "Nie udalo sie otworzyc pliku hasla.txt" << endl;
+        return 1;
+    }
+
+    set<string> hasla;
+    set<string> powtorzenia;
+    string haslo;
+
+    while (getline(plik, haslo)) {
+        if (!hasla.insert(haslo).second) {
+            powtorzenia.insert(haslo);
+        }
+    }
+    plik.close();
+
+    if (powtorzenia.empty()) {
+        cout << "W pliku nie ma żadnych powtorzen." << endl;
+    } else {
+        cout << "Hasla uzyte przez co najmniej dwoch uzytkownikow:" << endl;
+        for (const auto &powtorzenie : powtorzenia) {
+            cout << powtorzenie << endl;
+        }
+    }
+    return 0;
+}
+.............................................................................................................................................................................................................................
+    Zadanie 3
+    
